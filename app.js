@@ -16,9 +16,9 @@ db.once('open', function() {
     console.log("we're connected!");
 });
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var cardsRouter = require('./routes/cards.routes');
+var expenseTypesRouter = require('./routes/expenseTypes.routes');
+var paymentTypesRouter = require('./routes/paymentTypes.routes');
 
 var app = express();
 
@@ -28,8 +28,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/cards', cardsRouter);
+app.use('/expenseTypes', expenseTypesRouter);
+app.use('/paymentTypes', paymentTypesRouter);
 
 module.exports = app;

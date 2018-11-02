@@ -1,4 +1,3 @@
-var errorsController = require('./errors.controller');
 var Card = require('../models/card.model');
 
 module.exports.getAllCards = (req, res) => {
@@ -41,16 +40,13 @@ module.exports.updateCard = (req, res) => {
 
 module.exports.deleteCard = (req, res) => {
     Card.findById(req.params.cardId, (err, card) => {
-        if (!card) {
-            errorsController.sendMessageError(err, "Falha ao tentar apagar o cartão!");
-        } 
-        // if (err) throw err;
-        // card.remove(error => {
-        //     if (error) { 
-        //         res.status(500).json(error); 
-        //     } else {
-        //         res.status(201).json({ result: true});
-        //     }
-        // });
+        if (err) throw err;
+        card.remove(error => {
+            if (error) { 
+                res.status(500).json(error); 
+            } else {
+                res.status(201).json({ result: true});
+            }
+        });
     });
 };
